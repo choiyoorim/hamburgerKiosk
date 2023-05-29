@@ -2,8 +2,18 @@ public class Menu {
     private int menuNum;
     private String name;
     private int price;
+    private String category;
     private String description;
     private int stockCount;
+
+    Menu(int menuNum, String name, int price, String category, String description, int stockCount) {
+        this.menuNum = menuNum;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.description = description;
+        this.stockCount = stockCount;
+    }
 
     // 메뉴 정보 전달
     // toString과 동일한 역할
