@@ -22,6 +22,8 @@ public class Controller {
         switch (option) {
             case 1:
                 panel.print("주문하기 로직");
+                int input = panel.getInput();
+                panel.print("input: "+input);
                 break;
             case 2:
                 panel.print("장바구니 보기 로직");

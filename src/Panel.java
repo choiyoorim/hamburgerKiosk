@@ -3,6 +3,10 @@ import java.util.Scanner;
 public class Panel {
     Scanner sc = new Scanner(System.in);
 
+    int getInput() {
+        return sc.nextInt();
+    }
+
     int printStartOption() {
         System.out.print("--------선택지---------\n" +
                 "1번: 주문하기\n" +
