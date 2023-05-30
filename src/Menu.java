@@ -25,10 +25,9 @@ public class Menu {
     String showShortenMenuInfo() {
         return "";
     }
-
-    // Cart에서 totalAmount를 더해주기 위해 price가 필요한데, private이기 때문에 get 함수 추가
+    
     int getMenuPrice() {
-        return 0;
+        return price;
     }
 
     // 재고 확인
