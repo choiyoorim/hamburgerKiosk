@@ -11,7 +11,6 @@ public class Controller {
 
     void setPanel(Panel panel) {
         this.panel = panel;
-        System.out.println(this.panel);
     }
 
     void powerOn() {
@@ -19,16 +18,14 @@ public class Controller {
     }
 
     void powerOff() {
-        panel.printPowerOff(); // panel.print("종료됩니다.")와 동일
+        panel.printPowerOff();
     }
 
     int run() {
         int option = panel.printStartOption();
         switch (option) {
             case 1:
-                panel.print("주문하기 로직");
-                int input = panel.getInput();
-                panel.print("input: "+input);
+                startOrder();
                 break;
             case 2:
                 panel.print("장바구니 보기 로직");
@@ -41,5 +38,31 @@ public class Controller {
                 break;
         }
         return option;
+    }
+
+    private void startOrder() {
+        panel.print("------메뉴판------");
+        for (Menu menu: menuList) {
+            panel.print(menu.showMenuInfo());
+        }
+        panel.print("----------------");
+
+        while (true) {
+            panel.print("[메뉴 담기] 어떤 메뉴를 담으시겠어요?\n담으려는 메뉴의 번호를 입력해주세요. 그만 담으려면 0을 눌러주세요.");
+            int option = panel.getInput();
+            if (option == 0) {
+                break;
+            } else if ((option <= menuList.size()) && (option > 0)) {
+                Menu selectedMenu = menuList.get(option-1);
+                if (selectedMenu.checkStock()) {
+                    cart.addMenu(selectedMenu);
+                    panel.print("✅ 상품을 정상적으로 담았습니다.");
+                } else {
+                    panel.print("❌ 죄송합니다. 해당 상품은 품절되었습니다.");
+                }
+            } else {
+                panel.print("❌ 잘못된 입력입니다. 다시 입력해주세요.");
+            }
+        }
     }
 }
