@@ -7,7 +7,12 @@ public class Controller {
             new Menu(2, "치즈버거", 4000, "버거", "맛있는 치즈버거입니다.", 2),
             new Menu(3, "한우불고기버거", 4000, "버거", "맛있는 한우불고기버거입니다.", 2),
             new Menu(4, "감자튀김", 4000, "사이드메뉴", "맛있는 감자튀김.", 2));
-    private Panel panel = new Panel();
+    private Panel panel;
+
+    void setPanel(Panel panel) {
+        this.panel = panel;
+        System.out.println(this.panel);
+    }
 
     void powerOn() {
         panel.printPowerOn();

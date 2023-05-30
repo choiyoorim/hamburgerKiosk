@@ -1,7 +1,20 @@
 import java.util.Scanner;
 
 public class Panel {
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
+    private Controller controller;
+
+    void setController(Controller controller) {
+        this.controller = controller;
+    }
+
+    void startKiosk() {
+        controller.powerOn();
+        while (true) {
+            int option = controller.run();
+            if (option == 4) { break; }
+        }
+    }
 
     int getInput() {
         return sc.nextInt();
