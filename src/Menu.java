@@ -15,10 +15,9 @@ public class Menu {
         this.stockCount = stockCount;
     }
 
-    // 메뉴 정보 전달
-    // toString과 동일한 역할
+    // 메뉴판에 보일 메뉴 정보 전달
     String showMenuInfo() {
-        return "";
+        return menuNum + "번. " + name + "(" + category + ", " + description + ") - 가격: " + price + "원";
     }
 
     // 간단한 메뉴 정보 전달
@@ -34,6 +33,11 @@ public class Menu {
 
     // 재고 확인
     boolean checkStock() {
-        return false;
+        if (stockCount > 0) {
+            stockCount -= 1;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
