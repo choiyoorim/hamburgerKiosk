@@ -26,4 +26,8 @@ public class Cart {
     String showCartInfo() {
         return "";
     }
+
+    String showCartList() {
+        return "주문 목록: ";
+    }
 }

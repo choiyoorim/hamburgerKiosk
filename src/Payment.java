@@ -24,13 +24,13 @@ public class Payment {
     }
 
     public  String requestPayment(Cart cartInfo, PaymentType type) {
-        if (pay(cartInfo.getTotalAmount(), type)) {
+        if (pay(cartInfo.getTotalAmount(), type) == true) {
             orderNumber += 1;
             // Receipt 객체 생성하고 프린터
             Receipt receipt = new Receipt(cartInfo, cartInfo.getTotalAmount(), orderNumber);
             return receipt.print();
         } else {
-            return "";
+            return "❌ 카드 잔액이 부족합니다. 다시 시도해 주세요.";
         }
     }
 }

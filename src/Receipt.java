@@ -16,6 +16,7 @@ public class Receipt {
     void setTotalAmount() {}
 
     String print() {
-        return "";
+        return "\n✅ 결제가 완료되었습니다.\nReceipt #" + this.orderNumber
+                + cartInfo.showCartList();
     }
 }
