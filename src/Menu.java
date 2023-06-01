@@ -18,7 +18,7 @@ public class Menu {
     // 메뉴 정보 전달
     // toString과 동일한 역할
     String showMenuInfo() {
-        return "";
+        return menuNum + "번. " + name + "(" + category + ", " + description + ") - 가격: " + price + "원";
     }
 
     // 간단한 메뉴 정보 전달
@@ -27,13 +27,20 @@ public class Menu {
         return "";
     }
 
+    // Cart에서 menu네임을 보여주기 위한 작업, private이기 때문에 get 함수 추가
+    String getMenuName(){ return name; }
     // Cart에서 totalAmount를 더해주기 위해 price가 필요한데, private이기 때문에 get 함수 추가
     int getMenuPrice() {
-        return 0;
+        return price;
     }
 
     // 재고 확인
     boolean checkStock() {
-        return false;
+        if (stockCount > 0) {
+            stockCount -= 1;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
