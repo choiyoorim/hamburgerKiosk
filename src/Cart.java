@@ -7,6 +7,12 @@ public class Cart {
 
     // 장바구니에 메뉴 담기
     boolean addMenu(Menu menu) {
+        if (menuList.containsKey(menu)) {
+            menuList.put(menu, menuList.get(menu)+1);
+        } else {
+            menuList.put(menu, 1);
+        }
+        totalAmount += menu.getMenuPrice();
         return true;
     }
 
