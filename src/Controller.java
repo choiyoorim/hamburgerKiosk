@@ -49,11 +49,11 @@ public class Controller {
 
         while (true) {
             panel.print("[메뉴 담기] 어떤 메뉴를 담으시겠어요?\n담으려는 메뉴의 번호를 입력해주세요. 그만 담으려면 0을 눌러주세요.");
-            int option = panel.getInput();
-            if (option == 0) {
+            int menuNum = panel.getInput();
+            if (menuNum == 0) {
                 break;
-            } else if ((option <= menuList.size()) && (option > 0)) {
-                Menu selectedMenu = menuList.get(option - 1);
+            } else if ((menuNum <= menuList.size()) && (menuNum > 0)) {
+                Menu selectedMenu = menuList.get(menuNum - 1);
                 if (selectedMenu.checkStock()) {
                     cart.addMenu(selectedMenu);
                     panel.print("✅ 상품을 정상적으로 담았습니다.");
@@ -72,22 +72,24 @@ public class Controller {
         panel.print(String.valueOf(cartList));
     }
 
-    public void startPayment() {
+    private void startPayment() {
         // cart에 메뉴가 담겨 있는지 확인 후 결제 진행
         if (cart.getTotalAmount() > 0) {
             while(true) {
                 panel.print("결제 방식을 선택하세요.\n0-돌아가기, 1-카드 결제, 2-쿠폰 결제: ");
-                int option = panel.getInput();
+                int method = panel.getInput();
                 Payment payment = new Payment();
-                if (option == 0) {
+                // 0번을 선택하거나 정상적으로 결제된 경우 while 루프에서 탈출
+                if (method == 0) {
                     break;
-                } else if (option == 1 || option == 2) {
+                } else if (method == 1 || method == 2) {
                     String paymentResult = payment.requestPayment(cart,
-                            option == 1 ? PaymentType.card : PaymentType.coupon);
+                            method == 1 ? PaymentType.card : PaymentType.coupon);
                     if (paymentResult == "잔액 부족") {
                         panel.print("❌ 카드 잔액이 부족합니다. 다시 시도해 주세요.");
                     } else {
                         panel.print(paymentResult);
+                        cart.resetCart();
                         break;
                     }
                 } else {
