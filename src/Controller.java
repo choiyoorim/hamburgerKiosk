@@ -11,7 +11,6 @@ public class Controller {
 
     void setPanel(Panel panel) {
         this.panel = panel;
-        System.out.println(this.panel);
     }
 
     void powerOn() {
@@ -19,7 +18,7 @@ public class Controller {
     }
 
     void powerOff() {
-        panel.printPowerOff(); // panel.print("종료됩니다.")와 동일
+        panel.printPowerOff();
     }
 
     int run() {
@@ -29,7 +28,7 @@ public class Controller {
                 startOrder();
                 break;
             case 2:
-                panel.print("장바구니 보기 로직");
+                showCart();
                 break;
             case 3:
                 startPayment();
@@ -67,6 +66,12 @@ public class Controller {
         }
     }
 
+    private void showCart(){
+        StringBuilder cartList = cart.showCartInfo();
+        panel.print("------------------------");
+        panel.print(String.valueOf(cartList));
+    }
+
     public void startPayment() {
         // cart에 메뉴가 담겨 있는지 확인 후 결제 진행
         if (cart.getTotalAmount() > 0) {
@@ -74,12 +79,21 @@ public class Controller {
                 panel.print("결제 방식을 선택하세요(1-카드/2-쿠폰): ");
                 int option = panel.getInput();
                 Payment payment = new Payment();
-                if (option == 1) {
-                    String result = payment.requestPayment(cart, PaymentType.card);
-                    panel.print(result);
+                if (option == 0) {
                     break;
+                } else if (option == 1) {
+                    int paymentResult = payment.pay(cart.getTotalAmount(), PaymentType.card);
+                    if (paymentResult == -1) {
+                        panel.print("❌ 카드 잔액이 부족합니다. 다시 시도해 주세요.");
+                    } else if (paymentResult == -2) {
+                        panel.print("❌ 잘못된 결제 방식입니다.");
+                    } else {
+                        String result = payment.requestPayment(cart, PaymentType.coupon, 0);
+                        panel.print(result);
+                        break;
+                    }
                 } else if (option == 2) {
-                    String result = payment.requestPayment(cart, PaymentType.coupon);
+                    String result = payment.requestPayment(cart, PaymentType.coupon, 0);
                     panel.print(result);
                     break;
                 } else {

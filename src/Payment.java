@@ -7,31 +7,29 @@ public class Payment {
     private HashMap<Menu, Integer> orderList = new HashMap<Menu, Integer>();
     private int cardBalance = 6000;
 
-    private boolean pay(int amount, PaymentType type) {
+
+
+    public int pay(int amount, PaymentType type) {
         if (type == PaymentType.card) {
             if (amount > cardBalance) {
-                return false;
+                return -1;
             } else {
                 cardBalance -= amount;
-                return true;
+                return 0;
             }
         } else if (type == PaymentType.coupon) {
             // 쿠폰인 경우 일단 전부 통과
-            return true;
+            return 0;
         } else {
-            return false;
+            return -2;
         }
     }
 
-    public  String requestPayment(Cart cartInfo, PaymentType type) {
-        if (pay(cartInfo.getTotalAmount(), type) == true) {
-            orderNumber += 1;
-            // Receipt 객체 생성하고 프린터
-            Receipt receipt = new Receipt(cartInfo, cartInfo.getTotalAmount(), orderNumber);
-            return receipt.print();
-        } else {
-            return "❌ 카드 잔액이 부족합니다. 다시 시도해 주세요.";
-        }
+    public String requestPayment(Cart cartInfo, PaymentType type, int paymentResult) {
+        orderNumber += 1;
+        // Receipt 객체 생성하고 프린터
+        Receipt receipt = new Receipt(cartInfo, cartInfo.getTotalAmount(), orderNumber);
+        return receipt.print();
     }
 }
 

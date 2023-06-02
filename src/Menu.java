@@ -25,6 +25,8 @@ public class Menu {
     String showShortenMenuInfo() {
         return "";
     }
+
+    String getMenuName(){ return name; }
     
     int getMenuPrice() {
         return price;
