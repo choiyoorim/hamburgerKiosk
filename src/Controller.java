@@ -81,21 +81,15 @@ public class Controller {
                 Payment payment = new Payment();
                 if (option == 0) {
                     break;
-                } else if (option == 1) {
-                    int paymentResult = payment.pay(cart.getTotalAmount(), PaymentType.card);
-                    if (paymentResult == -1) {
+                } else if (option == 1 || option == 2) {
+                    String paymentResult = payment.requestPayment(cart,
+                            option == 1 ? PaymentType.card : PaymentType.coupon);
+                    if (paymentResult == "잔액 부족") {
                         panel.print("❌ 카드 잔액이 부족합니다. 다시 시도해 주세요.");
-                    } else if (paymentResult == -2) {
-                        panel.print("❌ 잘못된 결제 방식입니다.");
                     } else {
-                        String result = payment.requestPayment(cart, PaymentType.coupon, 0);
-                        panel.print(result);
+                        panel.print(paymentResult);
                         break;
                     }
-                } else if (option == 2) {
-                    String result = payment.requestPayment(cart, PaymentType.coupon, 0);
-                    panel.print(result);
-                    break;
                 } else {
                     panel.print("❌ 잘못된 입력입니다. 다시 입력해 주세요.");
                 }

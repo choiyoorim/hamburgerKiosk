@@ -9,7 +9,7 @@ public class Payment {
 
 
 
-    public int pay(int amount, PaymentType type) {
+    private int pay(int amount, PaymentType type) {
         if (type == PaymentType.card) {
             if (amount > cardBalance) {
                 return -1;
@@ -25,11 +25,15 @@ public class Payment {
         }
     }
 
-    public String requestPayment(Cart cartInfo, PaymentType type, int paymentResult) {
-        orderNumber += 1;
-        // Receipt 객체 생성하고 프린터
-        Receipt receipt = new Receipt(cartInfo, cartInfo.getTotalAmount(), orderNumber);
-        return receipt.print();
+    public String requestPayment(Cart cartInfo, PaymentType type) {
+        int payResult = pay(cartInfo.getTotalAmount(), type);
+        if (payResult == -1) {
+            return "잔액 부족";
+        } else {
+            orderNumber += 1;
+            Receipt receipt = new Receipt(cartInfo, cartInfo.getTotalAmount(), orderNumber);
+            return receipt.print();
+        }
     }
 }
 
