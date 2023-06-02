@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class Payment {
     private static int orderNumber = 0; // 해당 클래스의 모든 객체 통틀어 하나만 쓰이도록 static 선언
-    private int cardBalance = 6000;
+    private int cardBalance = 6000; // 임시 카드 잔액
 
     private int pay(int amount, PaymentType type) {
         if (type == PaymentType.card) {
@@ -12,11 +12,9 @@ public class Payment {
                 cardBalance -= amount;
                 return 0;
             }
-        } else if (type == PaymentType.coupon) {
-            // 쿠폰인 경우 일단 전부 통과
-            return 0;
         } else {
-            return -2;
+            // 임의로 쿠폰인 경우 전부 결제되는 것으로 설정
+            return 0;
         }
     }
 
@@ -25,6 +23,7 @@ public class Payment {
         if (payResult == -1) {
             return "잔액 부족";
         } else {
+            // 결제가 성공된 경우에만 orderNumber 1 증가
             orderNumber += 1;
             Receipt receipt = new Receipt(cartInfo, cartInfo.getTotalAmount(), orderNumber);
             return receipt.print();

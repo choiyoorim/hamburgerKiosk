@@ -79,6 +79,7 @@ public class Controller {
                 panel.print("결제 방식을 선택하세요.\n0-돌아가기, 1-카드 결제, 2-쿠폰 결제: ");
                 int option = panel.getInput();
                 Payment payment = new Payment();
+                // 0번을 선택하거나 정상적으로 결제된 경우 while 루프에서 탈출
                 if (option == 0) {
                     break;
                 } else if (option == 1 || option == 2) {

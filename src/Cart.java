@@ -1,9 +1,8 @@
 import java.util.HashMap;
 
 public class Cart {
-    private HashMap<Menu, Integer> menuList = new HashMap<Menu, Integer>();
+    private HashMap<Menu, Integer> menuList = new HashMap<Menu, Integer>(); // 담긴 메뉴와 메뉴별 수량을 담는 변수
     private int totalAmount = 0;
-    private int currentItemCount = 0;
 
     // 장바구니에 메뉴 담기
     boolean addMenu(Menu menu) {
@@ -16,13 +15,11 @@ public class Cart {
         return true;
     }
 
-    // Payment에서 requestPayment할때 Cart 클래스 자체를 넘긴다고 했을때, 총 금액 정보만 가져갈 수 있도록 함수 추가
     int getTotalAmount() {
         return  totalAmount;
     }
 
-    // 카트에 담긴 항목 보기(없으면 비었다는 문자열, 있으면 카트 항목 가공한 문자열 리턴)
-    // '2. 장바구니 보기' 때문에 추가
+    // 장바구니에 담긴 메뉴와 총 금액을 전달하는 함수
     StringBuilder showCartInfo() {
         StringBuilder cartInfo = new StringBuilder();
         if(totalAmount == 0){
@@ -38,6 +35,7 @@ public class Cart {
         return cartInfo;
     }
 
+    // 주문 내역과 총 금액을 전달하는 함수
     StringBuilder showCartList() {
         StringBuilder cartInfo = new StringBuilder();
             cartInfo.append("[주문 목록]\n");
