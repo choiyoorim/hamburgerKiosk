@@ -72,7 +72,7 @@ public class Controller {
         panel.print(String.valueOf(cartList));
     }
 
-    public void startPayment() {
+    private void startPayment() {
         // cart에 메뉴가 담겨 있는지 확인 후 결제 진행
         if (cart.getTotalAmount() > 0) {
             while(true) {

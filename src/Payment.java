@@ -1,13 +1,8 @@
 import java.util.HashMap;
 
 public class Payment {
-    private int paymentAmount = 0;
-    private PaymentType paymentOption = PaymentType.card;
     private static int orderNumber = 0; // 해당 클래스의 모든 객체 통틀어 하나만 쓰이도록 static 선언
-    private HashMap<Menu, Integer> orderList = new HashMap<Menu, Integer>();
     private int cardBalance = 6000;
-
-
 
     private int pay(int amount, PaymentType type) {
         if (type == PaymentType.card) {
