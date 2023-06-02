@@ -37,4 +37,14 @@ public class Cart {
         }
         return cartInfo;
     }
+
+    StringBuilder showCartList() {
+        StringBuilder cartInfo = new StringBuilder();
+            cartInfo.append("[주문 목록]\n");
+            for(Menu menu:menuList.keySet()){
+                cartInfo.append("\uD83C\uDF54 "+menu.getMenuName()+" "+menuList.get(menu)+"개\n");
+            }
+            cartInfo.append("결제 금액: "+totalAmount);
+        return cartInfo;
+    }
 }

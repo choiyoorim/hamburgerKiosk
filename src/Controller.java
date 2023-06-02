@@ -31,7 +31,7 @@ public class Controller {
                 showCart();
                 break;
             case 3:
-                panel.print("결제하기 로직");
+                startPayment();
                 break;
             case 4:
                 powerOff();
@@ -42,7 +42,7 @@ public class Controller {
 
     private void startOrder() {
         panel.print("------메뉴판------");
-        for (Menu menu: menuList) {
+        for (Menu menu : menuList) {
             panel.print(menu.showMenuInfo());
         }
         panel.print("----------------");
@@ -53,7 +53,7 @@ public class Controller {
             if (option == 0) {
                 break;
             } else if ((option <= menuList.size()) && (option > 0)) {
-                Menu selectedMenu = menuList.get(option-1);
+                Menu selectedMenu = menuList.get(option - 1);
                 if (selectedMenu.checkStock()) {
                     cart.addMenu(selectedMenu);
                     panel.print("✅ 상품을 정상적으로 담았습니다.");
@@ -72,5 +72,31 @@ public class Controller {
         panel.print(String.valueOf(cartList));
     }
 
-}
+    public void startPayment() {
+        // cart에 메뉴가 담겨 있는지 확인 후 결제 진행
+        if (cart.getTotalAmount() > 0) {
+            while(true) {
+                panel.print("결제 방식을 선택하세요.\n0-돌아가기, 1-카드 결제, 2-쿠폰 결제: ");
+                int option = panel.getInput();
+                Payment payment = new Payment();
+                if (option == 0) {
+                    break;
+                } else if (option == 1 || option == 2) {
+                    String paymentResult = payment.requestPayment(cart,
+                            option == 1 ? PaymentType.card : PaymentType.coupon);
+                    if (paymentResult == "잔액 부족") {
+                        panel.print("❌ 카드 잔액이 부족합니다. 다시 시도해 주세요.");
+                    } else {
+                        panel.print(paymentResult);
+                        break;
+                    }
+                } else {
+                    panel.print("❌ 잘못된 입력입니다. 다시 입력해 주세요.");
+                }
+            }
+        } else {
+            panel.print("❌ 장바구니에 담긴 상품이 없습니다.");
+        }
 
+    }
+}

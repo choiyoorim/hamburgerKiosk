@@ -11,11 +11,8 @@ public class Receipt {
         this.orderNumber = orderNumber;
     }
 
-    void setCartInfo() {}
-    void setOrderNumber() {}
-    void setTotalAmount() {}
-
     String print() {
-        return "";
+        return "\n✅ 결제가 완료되었습니다."+ "\n---------------" + "\nReceipt #" + this.orderNumber
+                + "\n" + cartInfo.showCartList();
     }
 }
