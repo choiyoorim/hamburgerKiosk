@@ -11,7 +11,6 @@ public class Controller {
 
     void setPanel(Panel panel) {
         this.panel = panel;
-        System.out.println(this.panel);
     }
 
     void powerOn() {
@@ -19,7 +18,7 @@ public class Controller {
     }
 
     void powerOff() {
-        panel.printPowerOff(); // panel.print("종료됩니다.")와 동일
+        panel.printPowerOff();
     }
 
     int run() {
@@ -27,6 +26,7 @@ public class Controller {
         switch (option) {
             case 1:
                 startOrder();
+                break;
             case 2:
                 showCart();
                 break;
@@ -39,6 +39,7 @@ public class Controller {
         }
         return option;
     }
+
     private void startOrder() {
         panel.print("------메뉴판------");
         for (Menu menu: menuList) {
@@ -70,5 +71,6 @@ public class Controller {
         panel.print("------------------------");
         panel.print(String.valueOf(cartList));
     }
+
 }
 
