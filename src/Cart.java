@@ -45,4 +45,9 @@ public class Cart {
             cartInfo.append("결제 금액: "+totalAmount);
         return cartInfo;
     }
+
+    void resetCart() {
+        menuList.clear();
+        totalAmount = 0;
+    }
 }

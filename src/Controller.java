@@ -89,6 +89,7 @@ public class Controller {
                         panel.print("❌ 카드 잔액이 부족합니다. 다시 시도해 주세요.");
                     } else {
                         panel.print(paymentResult);
+                        cart.resetCart();
                         break;
                     }
                 } else {
