@@ -20,14 +20,10 @@ public class Menu {
         return menuNum + "번. " + name + "(" + category + ", " + description + ") - 가격: " + price + "원";
     }
 
-    // 간단한 메뉴 정보 전달
-    // 영수증에 리턴할때, 더 위의 showMenuInfo보다 더 간략한 정보 전달하고자 생성했는데 불필요하면 지워도 O
-    String showShortenMenuInfo() {
-        return "";
-    }
-
+    // Cart에서 menu네임을 보여주기 위한 작업, private이기 때문에 get 함수 추가
     String getMenuName(){ return name; }
-    
+  
+    // Cart에서 totalAmount를 더해주기 위해 price가 필요한데, private이기 때문에 get 함수 추가
     int getMenuPrice() {
         return price;
     }
