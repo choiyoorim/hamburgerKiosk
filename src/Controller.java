@@ -28,7 +28,7 @@ public class Controller {
                 startOrder();
                 break;
             case 2:
-                panel.print("장바구니 보기 로직");
+                showCart();
                 break;
             case 3:
                 panel.print("결제하기 로직");
@@ -65,4 +65,12 @@ public class Controller {
             }
         }
     }
+
+    private void showCart(){
+        StringBuilder cartList = cart.showCartInfo();
+        panel.print("------------------------");
+        panel.print(String.valueOf(cartList));
+    }
+
 }
+

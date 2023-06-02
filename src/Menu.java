@@ -25,7 +25,12 @@ public class Menu {
     String showShortenMenuInfo() {
         return "";
     }
-    
+
+
+    // Cart에서 menu네임을 보여주기 위한 작업, private이기 때문에 get 함수 추가
+    String getMenuName(){ return name; }
+  
+    // Cart에서 totalAmount를 더해주기 위해 price가 필요한데, private이기 때문에 get 함수 추가
     int getMenuPrice() {
         return price;
     }
