@@ -76,7 +76,7 @@ public class Controller {
         // cart에 메뉴가 담겨 있는지 확인 후 결제 진행
         if (cart.getTotalAmount() > 0) {
             while(true) {
-                panel.print("결제 방식을 선택하세요(1-카드/2-쿠폰): ");
+                panel.print("결제 방식을 선택하세요.\n0-돌아가기, 1-카드 결제, 2-쿠폰 결제: ");
                 int option = panel.getInput();
                 Payment payment = new Payment();
                 if (option == 0) {
